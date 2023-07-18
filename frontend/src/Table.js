@@ -11,35 +11,25 @@ const TableHeader = () =>{
     )
 }
 
-const TableBody = () =>{
-    return(
-        <tbody>
-        <tr>
-        <td>Natacsha</td>
-        <td>nat@mail.com</td>
-        </tr>
-        <tr>
-        <td>João</td>
-        <td>joao@mail.com</td>
-        </tr>
-        <tr>
-        <td>José</td>
-        <td>jose@mail.com</td>
-        </tr>
-        <tr>
-        <td>Anna</td>
-        <td>anna@mail.com</td>
-        </tr>
-        </tbody>
-    )
+const TableBody = (props) =>{
+    const rows = props.characterData.map((row,index) =>{
+        return(
+            <tr key={index}>
+                <td>{row.name}</td>
+                <td>{row.email}</td>
+            </tr>
+        )
+    })
+    return <tbody>{rows}</tbody>
 }
 
 class Table extends Component {
     render(){
+        const { characterData } = this.props
         return(
             <table className='table'>
                 <TableHeader/>
-                <TableBody/>
+                <TableBody characterData = {characterData} />
             </table>
         )
     }

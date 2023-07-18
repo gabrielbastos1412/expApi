@@ -1,51 +1,26 @@
 import React, { Component } from 'react'
 
-const Produto = () =>{
-  return (
-   <div className="card-group">
-  <div className="card">
-    <img src="https://www.proativaalimentos.com.br/image/cache/catalog/img_prod/Laranja_lima_600x600[1]-1000x1000.jpg" className="card-img-top"
+const Produto = (props) =>{
+  const itens = props.data.map((row,index) =>{
+    return (
+        <div className="card">
+    <img src={row.urlimg} className="card-img-top"
       alt="Hollywood Sign on The Hill" />
     <div className="card-body">
-      <h5 className="card-title">Laranja</h5>
+      <h5 className="card-title">{row.name}</h5>
       <p className="card-text">
-        Esta e uma bela laranja
+        {row.descricao}
       </p>
       <a href="#" class="btn btn-primary">Comprar</a>
       <p className="card-text">
-        <small className="text-muted">Last updated 3 mins ago</small>
+        <small className="text-muted">Ultimo preco: {row.preco}</small>
       </p>
     </div>
   </div>
-  <div className="card">
-    <img src="https://hortifruti.com.br/media/catalog/product/1/0/100065-banana-prata-unidade.jpg?auto=webp&format=pjpg&width=640&height=800&fit=cover" className="card-img-top"
-      alt="Palm Springs Road" />
-    <div className="card-body">
-      <h5 className="card-title">Banana</h5>
-      <p className="card-text">Uma saborosa banana
-      </p>
-      <a href="#" class="btn btn-primary">Comprar</a>
-      <p className="card-text">
-        <small className="text-muted">Last updated 3 mins ago</small>
-      </p>
-    </div>
-  </div>
-  <div className="card">
-    <img src="https://scfoods.fbitsstatic.net/img/p/melancia-mini-unidade-70680/257182.jpg?w=800&h=800&v=no-change&qs=ignore" className="card-img-top"
-      alt="Los Angeles Skyscrapers" />
-    <div className="card-body">
-      <h5 className="card-title">Melancia</h5>
-      <p className="card-text">
-        Uma bela melancia
-      </p>
-      <a href="#" class="btn btn-primary">Comprar</a>
-      <p className="card-text">
-        <small className="text-muted">Last updated 3 mins ago</small>
-      </p>
-    </div>
-  </div>
-</div>
-  )
+    )
+  })
+  
+  return <div className="card-group">{itens}</div>
 }
 
 const Header = () =>{
@@ -91,13 +66,33 @@ const Header = () =>{
 
 class Menu extends Component {
     render(){
+      const produtos = [
+        {
+          urlimg: 'https://www.proativaalimentos.com.br/image/cache/catalog/img_prod/Laranja_lima_600x600[1]-1000x1000.jpg',
+          name: 'Laranja',
+          descricao: 'Esta é uma bela laranja',
+          preco: 5, 
+        },
+        {
+          urlimg: 'https://hortifruti.com.br/media/catalog/product/1/0/100065-banana-prata-unidade.jpg?auto=webp&format=pjpg&width=640&height=800&fit=cover',
+          name: 'Banana',
+          descricao: 'Esta é uma bela banana',
+          preco: 2
+        },
+        {
+          urlimg: 'https://scfoods.fbitsstatic.net/img/p/melancia-mini-unidade-70680/257182.jpg?w=800&h=800&v=no-change&qs=ignore',
+          name: 'Melancia',
+          descricao: 'Esta é uma bela melancia',
+          preco: 10
+        }
+      ]
         return(
             <div className='container'>
                 <Header/>
                 
-                <Produto/>
+                <Produto data ={produtos} />
 
-                <Produto/>
+                <Produto data ={produtos} />
             </div>
         )
     }
